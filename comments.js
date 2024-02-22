@@ -1,29 +1,18 @@
 // Create Web Server
-// Create a web server that's going to send back a list of comments to the client.
-// The server should send back some hard-coded comments as an array of objects.
-// It should send back the data as JSON.
+// Create a Web Server that listens to the port 8080
+// Create a Web Server that listens to the port 8080
+// When a client makes a request to the server, the server should respond with the following:
+// A status code of 200
+// A Content-Type of text/plain
+// The body of the response should be the following string: "OK"
 
 const http = require('http');
 
-// The server should send back the comments as JSON.
 const server = http.createServer((req, res) => {
-
-  // Hard-coded comments as an array of objects.
-  const comments = [
-    { username: 'user1', comment: 'comment1' },
-    { username: 'user2', comment: 'comment2' },
-    { username: 'user3', comment: 'comment3' }
-  ];
-
-  // Set the Content-Type header to application/json.
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(comments));
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('OK');
 });
 
-// Listen on port 3000.
-server.listen(3000);
-
-// Log a message to the console.
-console.log('Server is listening on port 3000...');
-
-// Test the server using Postman or the browser.
+server.listen(8080, () => {
+  console.log('Server is listening on http://localhost:8080');
+});
