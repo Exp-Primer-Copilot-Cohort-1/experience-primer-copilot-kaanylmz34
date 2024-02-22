@@ -1,25 +1,30 @@
 // Create Web Server
-// Create a web server that listens on port 3000 and serves the following responses:
-// / - Hello, World!
-// /cats - Meow!
-// /dogs - Woof!
-// /cats_and_dogs - Living together
+// Create a web server that listens on port 3000
+// Index (so / url) should return a welcome message and returns a 200 status code
+// Comments (so /comments) should return a list of comments from a variable and returns a 200 status code
+// If the server receives a request to any other route, it should return a 404 status code
 
 const http = require('http');
 
-const server = http.createServer((req, res) => {
-    // Response html header
-    res.writeHead(200, {'Content-Type': 'text/html'});
+const comments = [
+    { username: 'Alice', comment: 'I love cheese' },
+    { username: 'Bob', comment: 'Where are the cookies?' },
+    { username: 'Carol', comment: 'This is a comment' }
+];
 
+const server = http.createServer((req, res) => {
     if (req.url === '/') {
-        res.end('Hello, World!');
-    } else if (req.url === '/cats') {
-        res.end('Meow!');
-    } else if (req.url === '/dogs') {
-        res.end('Woof!');
-    } else if (req.url === '/cats_and_dogs') {
-        res.end('Living together');
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end('Welcome to our comments server!');
+    } else if (req.url === '/comments') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(comments));
     } else {
-        res.end('Hello, World!');
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Not found');
     }
+});
+
+server.listen(3000, () => {
+    console.log('Server is listening on port 3000');
 });
