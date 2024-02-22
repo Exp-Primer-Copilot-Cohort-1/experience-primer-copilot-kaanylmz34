@@ -1,17 +1,14 @@
-
 // Create Web Server
+// Create a Web Server that listens on port 3000. It should respond to requests for /comments with a JSON string. Use the provided comments array as the JSON string.
 
-// 1. Import the http module
-var http = require('http');
+const http = require('http');
 
-// 2. Create a server
-var server = http.createServer(function(req, res) {
-  // 3. Set the response HTTP header with HTTP status and Content type
-  res.writeHead(200, {'Content-Type': 'text/plain'});
+const comments = require('./comments');
 
-  // 4. Send the response body "Hello World"
-  res.end('Hello World\n');
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify(comments));
 });
 
-// 5. Prints a log once the server starts listening
-server.listen(8080, 'Server is running');
+server.listen(3000);
+console.log('Server listening on port 3000');
