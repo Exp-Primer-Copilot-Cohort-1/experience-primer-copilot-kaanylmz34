@@ -1,18 +1,12 @@
 // Create Web Server
-// Create a Web Server that listens to the port 8080
-// Create a Web Server that listens to the port 8080
-// When a client makes a request to the server, the server should respond with the following:
-// A status code of 200
-// A Content-Type of text/plain
-// The body of the response should be the following string: "OK"
+const express = require('express');
+const app = express();
+const port = 3000;
 
-const http = require('http');
+// Create a route
+app.get('/', (req, res) => res.send('Hello World!'));
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('OK');
-});
+// Start Web Server
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-server.listen(8080, () => {
-  console.log('Server is listening on http://localhost:8080');
-});
+// Path: comments.js 
