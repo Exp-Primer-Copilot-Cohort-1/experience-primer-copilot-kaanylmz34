@@ -1,12 +1,20 @@
 // Create Web Server
+// Create a new Express application
+// Create a new Router
+// Create a new route
+// Return a response from the route
+// Start the server
+
 const express = require('express');
 const app = express();
-const port = 3000;
+const commentsRouter = express.Router();
 
-// Create a route
-app.get('/', (req, res) => res.send('Hello World!'));
+commentsRouter.get('/', (req, res) => {
+  res.send('Comments');
+});
 
-// Start Web Server
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.use('/comments', commentsRouter);
 
-// Path: comments.js 
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
