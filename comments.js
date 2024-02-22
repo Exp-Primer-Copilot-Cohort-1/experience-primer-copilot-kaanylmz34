@@ -1,20 +1,25 @@
 // Create Web Server
-// Create a new Express application
-// Create a new Router
-// Create a new route
-// Return a response from the route
-// Start the server
+// Create a web server that listens on port 3000 and serves the following responses:
+// / - Hello, World!
+// /cats - Meow!
+// /dogs - Woof!
+// /cats_and_dogs - Living together
 
-const express = require('express');
-const app = express();
-const commentsRouter = express.Router();
+const http = require('http');
 
-commentsRouter.get('/', (req, res) => {
-  res.send('Comments');
-});
+const server = http.createServer((req, res) => {
+    // Response html header
+    res.writeHead(200, {'Content-Type': 'text/html'});
 
-app.use('/comments', commentsRouter);
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+    if (req.url === '/') {
+        res.end('Hello, World!');
+    } else if (req.url === '/cats') {
+        res.end('Meow!');
+    } else if (req.url === '/dogs') {
+        res.end('Woof!');
+    } else if (req.url === '/cats_and_dogs') {
+        res.end('Living together');
+    } else {
+        res.end('Hello, World!');
+    }
 });
